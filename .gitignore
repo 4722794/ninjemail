@@ -161,3 +161,8 @@ cython_debug/
 
 # logging
 logs/
+names.py
+names.csv
+geckodriver
+chrome*
+.DS_Store 
