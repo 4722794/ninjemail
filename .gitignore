@@ -166,3 +166,5 @@ names.csv
 geckodriver
 chrome*
 .DS_Store 
+encrypter.py
+creds.json
