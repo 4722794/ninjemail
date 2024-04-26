@@ -4,7 +4,7 @@ from ninjemail import Ninjemail
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-proxy_df = pd.Dataframe()
+proxy_df = pd.DataFrame()
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
 
@@ -19,7 +19,7 @@ names_df = pd.DataFrame(sheet.get_all_records())
 #%%
 def makemail(proxy,names,use_proxy=True):
     sample_entry = names[names['status'] == 'FALSE'].sample(1)
-    sample_proxy = proxy.sample(1).iloc[0].item()
+    # sample_proxy = proxy.sample(1).iloc[0].item()
     if use_proxy:
         mailninja = Ninjemail(
             browser='chrome',
