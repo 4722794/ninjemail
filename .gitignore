@@ -167,3 +167,4 @@ geckodriver
 chrome*
 .DS_Store 
 encrypter.py
+proxylist.csv

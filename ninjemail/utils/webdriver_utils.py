@@ -67,7 +67,7 @@ def create_driver(browser, captcha_extension=False, proxy=None):
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
         options.add_experimental_option('prefs', {'intl.accept_languages': 'en-us'})
-        options.add_argument('--headless=new')
+        # options.add_argument('--headless=new')
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         if proxy:
             options.add_argument(f'--proxy-server={proxy}')
