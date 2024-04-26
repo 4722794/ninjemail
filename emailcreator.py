@@ -4,7 +4,7 @@ from ninjemail import Ninjemail
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-proxy_df = pd.read_csv('proxylist.csv')
+proxy_df = pd.Dataframe()
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
 

@@ -12,3 +12,5 @@ pytest-mock
 pytest-cov
 undetected-chromedriver
 gspread
+ouath2client
+pandas
