@@ -11,3 +11,4 @@ pytest
 pytest-mock
 pytest-cov
 undetected-chromedriver
+gspread
