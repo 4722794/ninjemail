@@ -81,7 +81,7 @@ def create_driver(browser, captcha_extension=False, proxy=None):
         options = uc.ChromeOptions()
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
-         # options.headless = False
+        options.headless = True
         # options.add_argument("--window-size=800,600")
         options.add_argument("--remote-debugging-port=9222")
         options.add_argument("--disable-dev-shm-usage")

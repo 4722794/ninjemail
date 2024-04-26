@@ -41,7 +41,7 @@ def makemail(proxy,names,use_proxy=True):
 
 from time import sleep
 #%%
-for _ in range(1): 
+for _ in range(10): 
     try:
         email, idx = makemail(proxy_df,names_df,use_proxy=False)
         if email is not None:
@@ -49,6 +49,5 @@ for _ in range(1):
             sheet.update_cell(idx+2, 6, 'TRUE')
     except Exception as e:
         print(e)
-    sleep(2)
 
 #%%
