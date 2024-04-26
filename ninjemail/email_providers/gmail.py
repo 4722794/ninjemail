@@ -9,7 +9,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from sms_services import getsmscode, smspool, fivesim
 
 URL = 'https://accounts.google.com/signup'
-WAIT = 5
+WAIT = 3
 NEXT_BUTTON_XPATH = [
         "//span[contains(text(), 'Next')]",
         "//span[contains(text(),'I agree')]",

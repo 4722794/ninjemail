@@ -67,7 +67,7 @@ def create_driver(browser, captcha_extension=False, proxy=None):
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
         options.add_experimental_option('prefs', {'intl.accept_languages': 'en-us'})
-        options.add_argument('--headless=new')
+        # options.add_argument('--headless=new')
         options.add_argument("--remote-debugging-port=9222")
         options.add_argument("--disable-dev-shm-usage")
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -81,6 +81,11 @@ def create_driver(browser, captcha_extension=False, proxy=None):
         options = uc.ChromeOptions()
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
+         # options.headless = False
+        # options.add_argument("--window-size=800,600")
+        options.add_argument("--remote-debugging-port=9222")
+        options.add_argument("--disable-dev-shm-usage")
+       
         options.add_experimental_option('prefs', {'intl.accept_languages': 'en-us'})
 
         if proxy:
@@ -89,7 +94,7 @@ def create_driver(browser, captcha_extension=False, proxy=None):
             ext_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'captcha_solvers/capsolver-chrome-extension/')
             options.add_argument(f'--load-extension={ext_path}')
 
-        driver = uc.Chrome(options=options, headless=True, use_subprocess=False) 
+        driver = uc.Chrome(options=options, use_subprocess=False) 
     else:
         raise ValueError('Unsupported browser')
     return driver
