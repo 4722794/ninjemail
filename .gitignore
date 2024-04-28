@@ -168,3 +168,4 @@ chrome*
 .DS_Store 
 encrypter.py
 proxylist.csv
+creds.json

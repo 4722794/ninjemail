@@ -50,6 +50,7 @@ class Ninjemail():
     def __init__(self,
                  browser="firefox",
                  captcha_keys={},
+                 headless=True,
                  sms_keys={},
                  proxy=None,
                  auto_proxy=False
@@ -69,7 +70,7 @@ class Ninjemail():
         self.browser = browser
         self.captcha_keys = captcha_keys
         self.sms_keys = sms_keys
-
+        self.headless = headless
         self.captcha_services_supported = CAPTCHA_SERVICES_SUPPORTED
         self.default_captcha_service = DEFAULT_CAPTCHA_SERVICE
         self.sms_services_supported = SMS_SERVICES_SUPPORTED
@@ -174,7 +175,7 @@ class Ninjemail():
         if use_proxy:
             proxy = self.get_proxy()
 
-        driver = create_driver(self.browser, captcha_extension=True, proxy=proxy)
+        driver = create_driver(self.browser,self.headless, captcha_extension=True, proxy=proxy)
 
         username, password, first_name, last_name, \
             country, birthdate = generate_missing_info(username, password, first_name, last_name, country, birthdate)
@@ -218,7 +219,7 @@ class Ninjemail():
         if use_proxy:
             proxy = self.get_proxy()
 
-        driver = create_driver(self.browser, proxy=proxy)
+        driver = create_driver(self.browser,self.headless, proxy=proxy)
 
         username, password, first_name, last_name, \
             _, birthdate = generate_missing_info(username, password, first_name, last_name, '', birthdate)
@@ -265,7 +266,7 @@ class Ninjemail():
         if use_proxy:
             proxy = self.get_proxy()
 
-        driver = create_driver(self.browser, captcha_extension=True, proxy=proxy)
+        driver = create_driver(self.browser,self.headless,captcha_extension=True, proxy=proxy)
 
         sms_key = self.get_sms_key()
 

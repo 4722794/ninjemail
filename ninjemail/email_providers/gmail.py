@@ -78,13 +78,13 @@ def create_account(driver,
 
     # insert first and last name
     name_input = WebDriverWait(driver, WAIT).until(EC.presence_of_element_located((By.ID, 'firstName')))
-    name_input.send_keys(first_name)
+    name_input.send_keys(first_name.capitalize())
     lastname_input = WebDriverWait(driver, WAIT).until(EC.presence_of_element_located((By.ID, 'lastName')))
-    lastname_input.send_keys(last_name)
+    lastname_input.send_keys(last_name.capitalize())
     next_button(driver)
 
     # select birthdate
-    time.sleep(10)
+    time.sleep(5)
     month_combobox = Select(WebDriverWait(driver, WAIT).until(EC.element_to_be_clickable((By.ID, 'month'))))
     month_combobox.select_by_index(month)
     # driver.find_element(By.XPATH, f'//*[@id="month"]/option[{month}]').click() alternative
@@ -110,7 +110,7 @@ def create_account(driver,
         pass
 
     # insert username
-    time.sleep(4)
+    time.sleep(3)
     username_input = WebDriverWait(driver, WAIT).until(EC.presence_of_element_located((By.NAME, 'Username')))
     username_input.send_keys(username)
     next_button(driver)
@@ -137,7 +137,8 @@ def create_account(driver,
             phone = sms_provider.get_phone(send_prefix=True)
         elif SMS_SERVICE == 'smspool' or SMS_SERVICE == '5sim':
             phone, order_id = sms_provider.get_phone(send_prefix=True)
-        time.sleep(5)
+        elif SMS_SERVICE=='personal':
+            phone = '917775978497'
         WebDriverWait(driver, WAIT).until(EC.element_to_be_clickable((By.ID, "phoneNumberId"))).send_keys('+' + str(phone) + Keys.ENTER)
     except Exception as e:
         logging.error('Failed to enter phone number: %s', str(e))
@@ -162,24 +163,29 @@ def create_account(driver,
             code = sms_provider.get_code(phone)
         elif SMS_SERVICE == 'smspool' or  SMS_SERVICE == '5sim':
             code = sms_provider.get_code(order_id)
+        elif SMS_SERVICE=='personal':
+            # get code input from user
+            code = input("Enter the SMS code: ")
         WebDriverWait(driver, WAIT).until(EC.element_to_be_clickable((By.ID, "code"))).send_keys(str(code) + Keys.ENTER)
+        
+            
     except Exception as e:
         logging.error('Failed to enter SMS code: %s', str(e))
         raise
 
-    time.sleep(5)
+    time.sleep(2)
     driver.find_elements(By.TAG_NAME, "button")[-1].click()
     # phone recovery (skip)
     next_button(driver)
-    time.sleep(5)
+    time.sleep(2)
 
     # final step
     next_button(driver)
-    time.sleep(5)
+    time.sleep(2)
     next_button(driver)
-    time.sleep(5)
+    time.sleep(2)
     next_button(driver)
-
+    driver.quit()
     # log and return results
     logging.info("Verification complete.")
     logging.info("IF YOU ACCESS THIS ACCOUNT IMMEDIATELY FROM A DIFFERENT IP IT WILL BE BANNED")
@@ -191,5 +197,4 @@ def create_account(driver,
     logging.info(f"First Name:    {first_name}")
     logging.info(f"Last Name:     {last_name}")
     logging.info(f"Date of Birth: {month}/{day}/{year}")
-    driver.quit()
     return f"{username}@gmail.com", password

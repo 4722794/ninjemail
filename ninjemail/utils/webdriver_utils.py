@@ -11,7 +11,7 @@ import os
 from urllib.parse import urlparse
 
 
-def create_driver(browser, captcha_extension=False, proxy=None):
+def create_driver(browser,headless,captcha_extension=False, proxy=None):
     """
     Create a WebDriver instance for the specified browser with optional configurations.
 
@@ -42,7 +42,10 @@ def create_driver(browser, captcha_extension=False, proxy=None):
         options.add_argument('--disable-gpu')
         options.add_argument('--headless')
         custom_profile.set_preference("intl.accept_languages", "en-us")
-
+        if not headless:
+            options.headless = False
+        else:
+            options.headless = True
         # proxy
         if proxy:
             parsed_url = urlparse(proxy)
@@ -71,6 +74,10 @@ def create_driver(browser, captcha_extension=False, proxy=None):
         options.add_argument("--remote-debugging-port=9222")
         options.add_argument("--disable-dev-shm-usage")
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        if not headless:
+            options.headless = False
+        else:
+            options.headless = True
         if proxy:
             options.add_argument(f'--proxy-server={proxy}')
         if captcha_extension:
@@ -81,13 +88,14 @@ def create_driver(browser, captcha_extension=False, proxy=None):
         options = uc.ChromeOptions()
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
-        options.headless = True
-        # options.add_argument("--window-size=800,600")
         options.add_argument("--remote-debugging-port=9222")
         options.add_argument("--disable-dev-shm-usage")
        
         options.add_experimental_option('prefs', {'intl.accept_languages': 'en-us'})
-
+        if not headless:
+            options.headless = False
+        else:
+            options.headless = True
         if proxy:
             options.add_argument(f'--proxy-server={proxy}')
         if captcha_extension:
